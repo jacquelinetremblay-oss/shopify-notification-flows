@@ -82,10 +82,9 @@
           <tr>
             <td>
               
-          <h2>Your return request was declined</h2>
-          {% if return.decline["note"] != blank %}
-            <p class="return-requested__body">{{ return.decline["note"] }}</p>
-          {% endif %}
+          <h2>Your return request was sent</h2>
+          <p class="return-requested__body">Your return request was sent and is being reviewed. We'll email you once it's been completed.</p>
+
           <table class="row actions">
   <tr>
     <td class="empty-line">&nbsp;</td>
@@ -97,6 +96,11 @@
           <td class="button__cell"><a href="{{ order_details_url }}" class="button__text">View your order</a></td>
         </tr>
       </table>
+        <table class="link secondary-action-cell">
+          <tr>
+            <td class="link__cell">or <a href="{{ shop.url }}">Visit our store</a></td>
+          </tr>
+        </table>
     </td>
   </tr>
 </table>

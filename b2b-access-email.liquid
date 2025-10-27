@@ -1,0 +1,46 @@
+{% capture email_title %}
+  Welcome to {{shop_name}}
+{% endcapture %}
+{% capture email_sub_title %}
+  Place your first B2B order
+{% endcapture %}
+{% capture email_body %}
+  You now have access to start placing B2B orders with <a target="_blank" href="{{shop_link}}">{{shop_name}}</a>. Log in to place your first order. Your company name is {{company.name}}. Your name is {{customer.name}}
+{% endcapture %}
+{% capture credit_line_message %}
+<a href="https://ca.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=bade305f-c581-48a7-8124-c1edfa2de79c&env=ca&acct=680a5f63-3aa7-4ecf-8dc6-eec4880677e2&v=2">Complete the Guillevin credit application</a>
+{% endcapture %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+  </style>
+</head>
+
+  <body>
+    <table class="body">
+      <tr>
+        <td>
+          <table class="header row">
+  <tr>
+    <td class="header__cell">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="shop-name__cell">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="shop-name__text">
