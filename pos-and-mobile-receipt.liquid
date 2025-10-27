@@ -200,13 +200,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                 {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -284,7 +294,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -841,13 +856,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                  {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -925,7 +950,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -1801,13 +1831,23 @@
           {% else %}
             {% assign line_title = component.product.title %}
           {% endif %}
-          {% if line.quantity < component.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ component.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = component.quantity %}
-          {% endif %}
+                   {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -1885,7 +1925,12 @@
           {% if component.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ component.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if component.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -2098,13 +2143,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                  {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -2182,7 +2237,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -2725,13 +2785,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                   {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -2809,7 +2879,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -3023,13 +3098,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                  {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -3107,7 +3192,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
@@ -3316,13 +3406,23 @@
           {% else %}
             {% assign line_title = line.product.title %}
           {% endif %}
-          {% if line.quantity < line.quantity %}
-            {% capture line_display %}
-              {{ line.quantity }} of {{ line.quantity }}
-            {% endcapture %}
-          {% else %}
-            {% assign line_display = line.quantity %}
-          {% endif %}
+                    {%- assign property_quantity = '' -%}
+          {%- for p in line.line_item.properties -%}
+            {%- if p.first == 'quantity' -%}
+              {%- assign property_quantity = p.last -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if property_quantity != '' -%}
+            {%- assign line_display = property_quantity -%}
+          {%- elsif line.quantity < line.line_item.quantity -%}
+            {%- capture line_display -%}
+              {{ line.quantity }} of {{ line.line_item.quantity }}
+            {%- endcapture -%}
+          {%- else -%}
+            {%- assign line_display = line.line_item.quantity -%}
+          {%- endif -%}
 
           <span class="order-list__item-title">{{ line_title }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
 
@@ -3400,7 +3500,12 @@
           {% if line.selling_plan_allocation %}
             <span class="order-list__item-variant">{{ line.selling_plan_allocation.selling_plan.name }}</span><br/>
           {% endif %}
-
+ {%- for p in line.line_item.properties -%}
+            {%- if p.first.first == '_' or p.last == blank -%}{%- continue -%}{%- endif -%}
+            {% if p.first == 'ecofee' %}
+            <span class="order-list__item-variant">{{ p.first | capitalize }}: {{ p.last |times: 100 | money }} per unit</span><br/>
+            {% endif %}
+          {%- endfor -%}
           {% if line.refunded_quantity > 0 %}
             <span class="order-list__item-refunded">Refunded</span>
           {% endif %}
