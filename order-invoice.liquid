@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if payment_terms.type == 'fulfillment' and payment_terms.next_payment.due_at == nil %}
+  {% assign due_on_fulfilllment_terms = true %}
+{% else %}
+  {% assign due_on_fulfilllment_terms = false %}
+{% endif %}
+{% if source_name == 'shopify_draft_order' and financial_status == 'pending' %}
+  {% assign order_from_draft = true %}
+{% else %}
+  {% assign order_from_draft = false %}
+{% endif %}
+<head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+  </style>
+</head>
+
+<body>
+<table class="body">
+  <tr>
+    <td>
+      <table class="header row">
+  <tr>
+    <td class="header__cell">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="shop-name__cell">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="shop-name__text">
+                        <a href="{{shop.url}}">{{ shop.name }}</a>
+                      </h1>
+                    {%- endif %}
+                  </td>
+
+                    <td>
+                      <table class="order-po-number__container">
+                        <tr>
+                          <td class="order-number__cell">
+                            <span class="order-number__text">
+                              Invoice {{ order_name }}
+                            </span>
+                          </td>
